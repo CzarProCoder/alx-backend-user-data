@@ -7,6 +7,7 @@ import re
 from typing import List
 import logging
 
+
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
@@ -41,7 +42,7 @@ class RedactingFormatter(logging.Formatter):
                             super().format(record), self.SEPARATOR)
 
 
-def get_logger():
+def get_logger() -> logging.Logger:
     ''' Create a logging.logger object
     '''
     logger = logging.getLogger('user_data')
