@@ -57,15 +57,15 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    ''' Object to users table from holberton db
-    '''
+    """ Implement db conectivity
+    """
+    psw = os.environ.get("PERSONAL_DATA_DB_PASSWORD", "")
     username = os.environ.get('PERSONAL_DATA_DB_USERNAME', "root")
-    password = os.environ.get('PERSONAL_DATA_DB_PASSWORD', "")
     host = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
-    database = os.environ.get('PERSONAL_DATA_DB_NAME', )
-    connector = mysql.connector.connect(
+    db_name = os.environ.get('PERSONAL_DATA_DB_NAME')
+    conn = mysql.connector.connect(
         host=host,
-        database=database,
+        database=db_name,
         user=username,
-        password=password)
-    return connector
+        password=psw)
+    return conn
