@@ -1,4 +1,4 @@
-#!/user/bin/env python3
+#!/usr/bin/env python3
 
 ''' Module to handle API authentication
 '''
