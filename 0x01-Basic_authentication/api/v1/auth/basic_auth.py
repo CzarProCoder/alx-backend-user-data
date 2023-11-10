@@ -10,7 +10,7 @@ class BasicAuth(Auth):
     Inherits from Auth
     Implements basic authentication
     '''
-    def extract_base64_authorization_header(self, \
+    def extract_base64_authorization_header(self,
                                             authorization_header: str) -> str:
         '''
         Return the Base64 part from the Authorization
