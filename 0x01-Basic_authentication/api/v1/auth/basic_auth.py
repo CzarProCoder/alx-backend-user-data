@@ -45,13 +45,9 @@ class BasicAuth(Auth):
         '''
         Extract the username from the decoded base64 Authorization header
         '''
-        if decoded_base64_authorization_header is None:
-            return None
-        if not isinstance(decoded_base64_authorization_header, str):
-            return None
-        if ':' not in decoded_base64_authorization_header:
-            return None
-        logins = decoded_base64_authorization_header.split(':', 1)
-        email = logins[0]
-        password = logins[1]
-        return(email, password)
+        decoded_64 = decoded_base64_authorization_header
+        if (decoded_64 and isinstance(decoded_64, str) and
+                ":" in decoded_64):
+            res = decoded_64.split(":", 1)
+            return (res[0], res[1])
+        return (None, None)
