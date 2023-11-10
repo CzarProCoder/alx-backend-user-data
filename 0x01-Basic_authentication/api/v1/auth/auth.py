@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-""" Auth module """
+""" Auth module to implement authorization """
 from flask import request
 from typing import List, TypeVar
 from models.user import User
 
 
 class Auth:
-    """ class auth for authenticating users"""
+    """ Class auth for authenticating users"""
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ Check whether a path requires authentication
 
         Args:
             path (str): Path to be checked
-            excluded path (list): List of paths that don't require authenication
-        
+            excluded path (list): List of paths that
+                don't require authenication
+
         Returns:
             True: If a path requires authentication
             False: If a path does not require authentication
@@ -45,7 +46,7 @@ class Auth:
 
         Args:
             request: Request from client
-        
+
         Returns:
             authorization: Returns the authorization if available in header
             None: If the key 'Authorization' is not available in header
@@ -59,5 +60,5 @@ class Auth:
             return authorization
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """ return current user else None"""
+        """ Return current user else None """
         return None
