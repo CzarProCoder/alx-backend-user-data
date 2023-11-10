@@ -1,7 +1,8 @@
-from auth import Auth
+#!/usr/bin/env python3
 '''
 Module to define basic auth
 '''
+from auth import Auth
 
 
 class BasicAuth(Auth):
