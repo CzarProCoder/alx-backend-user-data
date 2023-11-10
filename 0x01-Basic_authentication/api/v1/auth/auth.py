@@ -40,7 +40,16 @@ class Auth:
             return False
 
     def authorization_header(self, request=None) -> str | None:
-        """ authorization header"""
+        """
+        Check and return the authorization header
+
+        Args:
+            request: Request from client
+        
+        Returns:
+            authorization: Returns the authorization if available in header
+            None: If the key 'Authorization' is not available in header
+        """
         if request is None:
             return None
         authorization = request.headers.get('Authorization')
