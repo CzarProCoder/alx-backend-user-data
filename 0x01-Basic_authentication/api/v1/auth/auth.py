@@ -40,7 +40,7 @@ class Auth:
         else:
             return False
 
-    def authorization_header(self, request=None) -> str | None:
+    def authorization_header(self, request=None) -> str:
         """
         Check and return the authorization header
 
