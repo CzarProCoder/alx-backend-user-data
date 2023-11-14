@@ -5,6 +5,7 @@ Implements Session Authentication
 '''
 from api.v1.auth.auth import Auth
 from uuid import uuid4
+from models.user import User
 
 
 class SessionAuth(Auth):
@@ -34,3 +35,15 @@ class SessionAuth(Auth):
             return None
         user_id = self.user_id_by_session_id.get(session_id)
         return user_id
+
+    def current_user(self, request=None):
+        '''
+        check the current user from a request
+        '''
+        cookie = self.session_cookie(request)
+        if cookie:
+            user_id = self.user_id_for_session_id(cookie)
+            if user_id:
+                user= User.get(user_id)
+                return user
+        return
