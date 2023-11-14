@@ -44,6 +44,6 @@ class SessionAuth(Auth):
         if cookie:
             user_id = self.user_id_for_session_id(cookie)
             if user_id:
-                user= User.get(user_id)
+                user = User.get(user_id)
                 return user
         return
