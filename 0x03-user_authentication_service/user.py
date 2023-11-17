@@ -1,11 +1,13 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy  import Column, INTEGER, VARCHAR 
+from sqlalchemy import Column, INTEGER, VARCHAR
 
 '''
 Create a sqlalchemy base class
 '''
 
 Base = declarative_base()
+
+
 class User(Base):
     '''
     SQLAlchemnt model to implement a user
