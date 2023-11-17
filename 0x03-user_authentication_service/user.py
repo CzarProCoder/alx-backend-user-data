@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+'''
+Module that implements user class
+'''
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
