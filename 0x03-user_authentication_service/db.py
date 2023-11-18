@@ -58,7 +58,7 @@ class DB:
         except Exception:
             raise NoResultFound
 
-    def update_user(self, user_id, **kwargs) -> None:
+    def update_user(self, user_id: int, **kwargs) -> None:
         '''
         Updates user with the provided arguments
         '''
@@ -72,4 +72,3 @@ class DB:
             self._session.commit()
         except NoResultFound:
             raise NoResultFound("results not found")
-
