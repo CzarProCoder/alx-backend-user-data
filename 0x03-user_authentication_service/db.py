@@ -12,6 +12,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from user import Base
 from user import User
 
+VALID_FIELDS = ['id', 'email', 'hashed_password', 'session_id', 'reset_token']
 
 class DB:
     """DB class
@@ -43,9 +44,15 @@ class DB:
         session.add(new_user)
         session.commit()
         return new_user
-    
-    def find_user_by(self):
+
+    def find_user_by(self, **kwargs) -> User:
         '''
         Find user based on arbitrary arguments passed
         '''
-        
+        if not kwargs or any(x not in VALID_FIELDS for x in kwargs):
+            raise InvalidRequestError
+        session = self._session
+        try:
+            return session.query(User).filter_by(**kwargs).first()
+        except Exception:
+            raise NoResultFound
