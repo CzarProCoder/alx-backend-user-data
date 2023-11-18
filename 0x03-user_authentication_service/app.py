@@ -42,10 +42,10 @@ def login():
     if not AUTH.valid_login(email, password):
         abort(401)
     else:
-       session_id = AUTH.create_session(email)
-       Response = jsonify({"email": email, "message": "logged in"})
-       Response.set_cookie("session_id", session_id)
-       return Response
+        session_id = AUTH.create_session(email)
+        Response = jsonify({"email": email, "message": "logged in"})
+        Response.set_cookie("session_id", session_id)
+        return Response
 
 
 if __name__ == '__main__':
