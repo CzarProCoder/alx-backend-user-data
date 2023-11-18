@@ -63,7 +63,7 @@ def logout():
 
 
 @app.route("/profile", methods=['GET'], strict_slashes=False)
-def profile():
+def profile() -> str:
     '''
     Access the user profile
     '''
