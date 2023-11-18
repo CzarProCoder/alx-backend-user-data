@@ -3,7 +3,7 @@
 '''
 Entry point to the application
 '''
-from flask import Flask, jsonify, request, abort, Response
+from flask import Flask, jsonify, request, abort, Response, redirect, url_for
 from auth import Auth
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -36,6 +36,7 @@ def users():
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login():
     '''
+    Allow user login
     '''
     email = request.form.get('email')
     password = request.form.get('password')
@@ -46,6 +47,19 @@ def login():
         Response = jsonify({"email": email, "message": "logged in"})
         Response.set_cookie("session_id", session_id)
         return Response
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout():
+    '''
+    Logout a user from the system
+    '''
+    session_id = request.cookies.get('session_id')
+    user = AUTH.get_user_from_session_id(session_id)
+    if user:
+        AUTH.destroy_session(session_id)
+        return redirect(url_for('index'))
+    abort(403)
 
 
 if __name__ == '__main__':
