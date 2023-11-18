@@ -57,3 +57,19 @@ class DB:
             return session.query(User).filter_by(**kwargs).one()
         except Exception:
             raise NoResultFound
+
+    def update_user(self, user_id, **kwargs) -> None:
+        '''
+        Updates user with the provided arguments
+        '''
+        try:
+            user = self.find_user_by(id=user_id)
+            for k, v in kwargs.items():
+                if hasattr(user, k):
+                    setattr(user, k, v)
+                else:
+                    raise ValueError("Such attributes do not exist")
+            self._session.commit()
+        except NoResultFound:
+            raise NoResultFound("results not found")
+
