@@ -79,7 +79,7 @@ class Auth:
         Destroy a session from the user db
         '''
         try:
-            user = self._db.find_user_by(user_id=user_id)
+            user = self._db.find_user_by(id=user_id)
             user.user_id = None
         except NoResultFound:
             return None
