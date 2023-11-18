@@ -50,7 +50,7 @@ def login():
 
 
 @app.route("/sessions", methods=["DELETE"], strict_slashes=False)
-def logout():
+def logout() -> str:
     """ logout a user"""
     try:
         session_id = request.cookies.get("session_id")
@@ -62,7 +62,7 @@ def logout():
         abort(403)
 
 
-@app.route("/profile", methods=['GET'], strict_slashes=False)
+@app.route("/profile", methods=["GET"], strict_slashes=False)
 def profile() -> str:
     '''
     Access the user profile
@@ -73,6 +73,15 @@ def profile() -> str:
         if user:
             return jsonify({"email": "<user email>"})
     abort(403)
+
+
+@app.route('/reset_password', methods=['POST'], strict_slashes=False)
+def reset_password():
+    '''
+    Send a reset password token to the user
+    '''
+    email = request.form.get('email')
+
 
 
 if __name__ == '__main__':
