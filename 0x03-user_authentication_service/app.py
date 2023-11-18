@@ -3,7 +3,7 @@
 '''
 Entry point to the application
 '''
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort, Response
 from auth import Auth
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -31,6 +31,21 @@ def users():
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
     return jsonify({"email": email, "message": "user created"})
+
+
+@app.route('/sessions', methods=['POST'], strict_slashes=False)
+def login():
+    '''
+    '''
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if not AUTH.valid_login(email, password):
+        abort(401)
+    else:
+       session_id = AUTH.create_session(email)
+       Response = jsonify({"email": email, "message": "logged in"})
+       Response.set_cookie("session_id", session_id)
+       return Response
 
 
 if __name__ == '__main__':
