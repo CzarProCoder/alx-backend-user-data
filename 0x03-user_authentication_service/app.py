@@ -76,11 +76,17 @@ def profile() -> str:
 
 
 @app.route('/reset_password', methods=['POST'], strict_slashes=False)
-def reset_password():
+def reset_password() -> str:
     '''
     Send a reset password token to the user
     '''
     email = request.form.get('email')
+    try:
+        user = AUTH._db.find_user_by(email=email)
+        reset_token = AUTH.get_reset_password_token(email)
+        return ({"email": email, "reset_token": reset_token})
+    except NoResultFound:
+        abort(403)
 
 
 
