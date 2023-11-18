@@ -50,7 +50,7 @@ def login():
 
 
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
-def logout():
+def logout() -> str:
     '''
     Logout a user from the system
     '''
@@ -62,8 +62,6 @@ def logout():
             return redirect(url_for('index'))
         else:
             abort(403)
-    except NoResultFound:
-        abort(403)
 
 
 if __name__ == '__main__':
